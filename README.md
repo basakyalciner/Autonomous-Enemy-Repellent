@@ -1,1 +1,3 @@
 # Autonomous-Enemy-Repellent
+
+The project is under construction.} The Autonomous Enemy Repellent project is a project that follows the detected enemy with algorithms such as enemy detection, object-human tracking, distance detection and depth detection with the data coming from the camera, focusing on the target with the incoming voice command, and destroying and warning according to the incoming command. The project consists of two parts as electronic design and software. While the software part works for the above algorithms, the electrical part includes the parts of the weapon moving with the data from the camera and automatic firing.
