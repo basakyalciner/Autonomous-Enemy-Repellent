@@ -1,0 +1,98 @@
+int datafromUser=0,motorA=0,listen_fl=0,x_fl=0,y_fl=0;
+int incoming[1];
+int deflectionX=20,deflectionY=20;
+int deflection = 0;
+int fark_x=0,fark_y=0;
+int adimSayisi=400;
+int transistorPin = 7;
+#define dirPinX 11
+#define stepPinX 12
+#define dirPinY 2
+#define stepPinY 3
+void setup() {
+  pinMode(stepPinX, OUTPUT);
+  pinMode(dirPinX, OUTPUT);
+  pinMode(stepPinY, OUTPUT);
+  pinMode(dirPinY, OUTPUT);
+  pinMode(transistorPin, OUTPUT);
+  Serial.begin(115200);
+  
+}
+void ListenPort(){
+  if(Serial.available()>1)
+    {
+         fark_x = Serial.parseInt();
+         fark_y = Serial.parseInt();
+
+     }
+      // farkX=Serial.readString().toInt();
+      if(fark_x < 0-deflectionX || fark_x > 0+deflectionX){
+        x_fl=1;
+      }
+      if(fark_y < 0-deflectionY || fark_y > 0+deflectionY){
+        y_fl=1;
+      }
+
+      listen_fl = 1;
+    }
+void loop() {
+  ListenPort();
+
+  // X  EKSENİ
+  if(x_fl==1 && listen_fl==1){
+    if(fark_x<0){
+        digitalWrite(dirPinX, LOW);
+        digitalWrite(stepPinX, HIGH);
+        delayMicroseconds(1300);
+        digitalWrite(stepPinX, LOW);
+        delayMicroseconds(1000);  
+
+     
+    }
+
+    if(fark_x>0){
+        digitalWrite(dirPinX, HIGH);
+        digitalWrite(stepPinX, HIGH);
+        delayMicroseconds(1300);
+        digitalWrite(stepPinX, LOW);
+        delayMicroseconds(1000);   
+
+    }
+    
+    if(0-deflectionX <= fark_x && 0+deflectionX>=fark_x){
+    fark_x = 0;
+    x_fl = 0;   
+    }
+  }
+  // Y KONTROL
+  if(y_fl == 1 && listen_fl==1 and x_fl==0){
+
+    if(fark_y<0){
+        digitalWrite(dirPinY, LOW);
+        digitalWrite(stepPinY, HIGH);
+        delayMicroseconds(400);
+        digitalWrite(stepPinY, LOW);
+        delayMicroseconds(400);
+    }
+    if(fark_y>0){
+        digitalWrite(dirPinY, HIGH);
+        digitalWrite(stepPinY, HIGH);
+        delayMicroseconds(400);
+        digitalWrite(stepPinY, LOW);
+        delayMicroseconds(400);
+
+    }
+    if(0-deflectionY <= fark_y && 0+deflectionY>=fark_y){
+    fark_y = 0;
+    y_fl = 0;   
+    }
+    }
+
+  if(fark_x == 0 && fark_y == 0 ){
+    // D7 pini üzerinden transistöre bir çıkış sinyali gönderme
+    digitalWrite(transistorPin, HIGH);
+    delay(3000); // 1 saniye bekleme
+    digitalWrite(transistorPin, LOW);
+    delay(1000); // 1 saniye bekleme
+  }
+  }
