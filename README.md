@@ -1,5 +1,5 @@
 # Autonomous Firearm System with YOLOv4: Enemy Detection and Neutralization
-# Autonomous Firearm System with YOLOv4: Enemy Detection and Neutralization
+
 
 ![image](https://github.com/basakyalciner/Autonomous-Enemy-Repellent/assets/56589435/2fa0f572-37d7-4109-9245-b05b155bb582)
 ![image](https://github.com/basakyalciner/Autonomous-Enemy-Repellent/assets/56589435/1026acf6-81e7-41dc-aecc-c4b1019f73ca)
